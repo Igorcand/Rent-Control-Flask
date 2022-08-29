@@ -1,0 +1,20 @@
+[default]
+DEBUG = false
+EXTENSIONS = [
+    "rental.ext.database:init_app",
+    "rental.ext.admin:init_app",
+    "rental.ext.auth:init_app",
+    "rental.ext.cli:init_app",
+    "rental.ext.toolbar:init_app",
+    "rental.ext.crypt:init_app",
+    "rental.ext.search:init_app",
+    "rental.ext.upload:init_app",
+]
+
+[development]
+DEBUG = true
+SQLALCHEMY_DATABASE_URI = "sqlite:///rental.db"
+
+
+[production]
+SQLALCHEMY_TRACK_MODIFICATIONS = false
