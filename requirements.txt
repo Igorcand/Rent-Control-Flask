@@ -10,7 +10,7 @@ Flask_SQLAlchemy
 flask-msearch
 flask-debugtoolbar
 flask-login
-
+flask_restx
 
 
 dynaconf
