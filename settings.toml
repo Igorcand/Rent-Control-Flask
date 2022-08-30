@@ -9,6 +9,8 @@ EXTENSIONS = [
     "rental.ext.crypt:init_app",
     "rental.ext.search:init_app",
     "rental.ext.upload:init_app",
+    "rental.blueprints.restapi:init_app",
+    "rental.blueprints.webui:init_app",
 ]
 
 [development]
