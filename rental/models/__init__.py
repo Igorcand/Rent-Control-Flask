@@ -1,33 +1,55 @@
 from rental.ext.database import db
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+class UserModel(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(30), unique=False, nullable=False)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(180), unique=False, nullable=False)
 
+    def __init__(self, name, username, email, password):
+        self.name = name 
+        self.username = username
+        self.email = email
+        self.password = password
+    
+    def json(self):
+        return {
+            'name': self.name,
+            'username' : self.username,
+            'email' : self.email
+        }
+
+    @classmethod
+    def find_all(cls):
+        return cls.query.all()
+
+    @classmethod
+    def find_by_username(cls, username):
+        return cls.query.filter_by(username=username).first()
+    
+    def find_by_email(cls, email):
+        return cls.query.filter_by(email=email).first()
+
     def __repr__(self):
         return '<User %r>' % self.username
+    
+    
 
 class Address(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), unique=False)
-    username = db.Column(db.String(50), unique=True)
-    email = db.Column(db.String(50), unique=True)
-    password = db.Column(db.String(200), unique=False)
-    country = db.Column(db.String(50), unique=False)
-    state = db.Column(db.String(50), unique=False)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    street = db.Column(db.String(50), unique=True)
+    number = db.Column(db.Integer, unique=False)
     city = db.Column(db.String(50), unique=False)
-    contact = db.Column(db.String(50), unique=False)
-    address = db.Column(db.String(50), unique=False)
-    zipcode = db.Column(db.String(50), unique=False)
+    state = db.Column(db.String(50), unique=False)
+    country = db.Column(db.String(50), unique=False)
+    zipcode = db.Column(db.Integer, unique=False)
 
     def __repr__(self):
         return '<Address %r>' % self.name
 
 class Tenant(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(30), unique=False, nullable=False)
     age = db.Column(db.Integer, unique=True, nullable=False)
     cpf = db.Column(db.Integer, unique=True, nullable=False)
