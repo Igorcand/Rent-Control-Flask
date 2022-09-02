@@ -1,9 +1,11 @@
 from flask_restx import Api, Resource, fields, Namespace, reqparse
 from rental.models import  UserModel
+from rental.ext.database import db
+from flask import request
 
 ns = Namespace(name='users', description='Users operations')
 
-user_doc = ns.model('User', 
+user_model = ns.model('User', 
 {
     'id': fields.Integer(description='User ID'),
     'name': fields.String(description='User name'),
@@ -12,50 +14,89 @@ user_doc = ns.model('User',
     'password': fields.Integer(description='User password'),
 })
 
-class AllUsersResource(Resource):
 
-    @ns.doc('list_user')
-    @ns.marshal_with(user_doc)
+
+@ns.route('/')
+class Users(Resource):
+    @ns.marshal_list_with(user_model, code=200, envelope='users')
     def get(self):
-        user = UserModel.find_all()
-        print(user)
-        return [UserModel( name=x.name, username=x.username, email=x.email, password=x.password).json() for x in user] 
+        '''Get all users'''
+        users = UserModel.query.all()
+        return users
+
+    @ns.marshal_list_with(user_model, code=200, envelope='user')
+    @ns.expect(user_model)
+    def post(self):
+        data = request.get_json()
+        
+        name = data.get('name')
+        username = data.get('username')
+        email = data.get('email')
+        password = data.get('password')
+
+        user = UserModel(name=name, username=username, email=email, password=password)
+        db.session.add(user)
+        db.session.commit()
+        return user
+
      
-# INSERT INTO user_model (name, username, email, password) VALUES ("igor", "igor01", "igor@email.com", "1234")
+@ns.route('/<string:username>/')
 class UserResource(Resource):
 
-    parser = reqparse.RequestParser()
-    parser.add_argument("name", type=str, required=True, help="This field cannot be left blank")
-    #parser.add_argument("username", type=str, required=True, help="This field cannot be left blank")
-    parser.add_argument("email", type=str, required=True, help="This field cannot be left blank")
-    parser.add_argument("password", type=str, required=True, help="This field cannot be left blank")
-
-
-    @ns.doc('list_user')
-    @ns.marshal_with(user_doc)
+    @ns.marshal_with(user_model, code=200, envelope='user')
+    @ns.response(404, 'Todo not found')
     def get(self, username):
-        user = UserModel.find_by_username(username)
-        print(user)
+        user = UserModel.query.filter_by(username=username).first()
         if user:
-            return user.json() 
-        return {'message': 'Username name not found'}, 404 
-    
-    @ns.doc('add_user')
-    @ns.marshal_with(user_doc)
-    def post(self, username):
-        data = UserResource.parser.parse_args()
-        username = data['username']
-        email = data['email']
-
-        if UserModel.find_by_username(username):
-            return (
-                {"Message": f"An user with username '{username}' already exists"}
-            )
+            return user
+        ns.abort(404, description=f"This username '{username}' doesen't exist")
         
-        if UserModel.find_by_email(email):
-            return (
-                {"Message": f"An user with email '{email}' already exists"}
-            )
-        user = UserModel.query.all()
-        return [UserModel( name=x.name, username=x.username, email=x.email).json() for x in user] 
+    
+    @ns.marshal_with(user_model, code=200, envelope='user')
+    def put(self,username):
+
+        ''' Update a book'''
+        user = UserModel.query.filter_by(username=username).first()
+        if user:
+
+            data=request.get_json()
+            print(f'data = {data}')
+
+            user.name=data.get('name')
+            user.username=data.get('username')
+            user.email=data.get('email')
+            user.password=data.get('password')
+
+            db.session.commit()
+        else:
+            data = request.get_json()
+        
+            name = data.get('name')
+            username = data.get('username')
+            verity_user = UserModel.query.filter_by(username=username).first()
+            if verity_user:
+                ns.abort(404, description=f"This username '{username}' already exist")
+
+            email = data.get('email')
+            verity_user = UserModel.query.filter_by(email=email).first()
+            if verity_user:
+                ns.abort(404, description=f"This email '{email}' already exist")
+
+            password = data.get('password')
+            user = UserModel(name=name, username=username, email=email, password=password)
+            db.session.add(user)
+            db.session.commit()
+
+        return user,200
+
+    @ns.marshal_with(user_model, code=200, envelope='user')
+    def delete(self,username):
+        '''Delete a book'''
+        user = UserModel.query.filter_by(username=username).first()
+        if user:
+            db.session.delete(user)
+            db.session.commit()
+            return user,200
+        ns.abort(404, description=f"This username '{username}' doesen't exist")
+   
     

@@ -1,5 +1,5 @@
 from flask_restx import Api, Resource, fields, Namespace
-from rental.models import Tenant, User, Address
+from rental.models import Tenant, UserModel, Address
 
 ns = Namespace(name='todos', description='TODO operations')
 
