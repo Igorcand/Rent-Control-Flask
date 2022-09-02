@@ -7,34 +7,8 @@ class UserModel(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(180), unique=False, nullable=False)
 
-    def __init__(self, name, username, email, password):
-        self.name = name 
-        self.username = username
-        self.email = email
-        self.password = password
-    
-    def json(self):
-        return {
-            'name': self.name,
-            'username' : self.username,
-            'email' : self.email
-        }
-
-    @classmethod
-    def find_all(cls):
-        return cls.query.all()
-
-    @classmethod
-    def find_by_username(cls, username):
-        return cls.query.filter_by(username=username).first()
-    
-    def find_by_email(cls, email):
-        return cls.query.filter_by(email=email).first()
-
     def __repr__(self):
-        return '<User %r>' % self.username
-    
-    
+        return self.username
 
 class Address(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
