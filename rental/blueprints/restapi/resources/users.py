@@ -40,23 +40,23 @@ class Users(Resource):
         return user
 
      
-@ns.route('/<string:username>/')
+@ns.route('/<int:id>/')
 class UserResource(Resource):
 
     @ns.marshal_with(user_model, code=200, envelope='user')
     @ns.response(404, 'Todo not found')
-    def get(self, username):
-        user = UserModel.query.filter_by(username=username).first()
+    def get(self, id):
+        user = UserModel.query.filter_by(id=id).first()
         if user:
             return user
-        ns.abort(404, description=f"This username '{username}' doesen't exist")
+        ns.abort(404, description=f"This user id '{id}' doesen't exist")
         
     
     @ns.marshal_with(user_model, code=200, envelope='user')
-    def put(self,username):
+    def put(self,id):
 
         ''' Update a book'''
-        user = UserModel.query.filter_by(username=username).first()
+        user = UserModel.query.filter_by(id=id).first()
         if user:
 
             data=request.get_json()
@@ -90,13 +90,13 @@ class UserResource(Resource):
         return user,200
 
     @ns.marshal_with(user_model, code=200, envelope='user')
-    def delete(self,username):
+    def delete(self,id):
         '''Delete a book'''
-        user = UserModel.query.filter_by(username=username).first()
+        user = UserModel.query.filter_by(id=id).first()
         if user:
             db.session.delete(user)
             db.session.commit()
             return user,200
-        ns.abort(404, description=f"This username '{username}' doesen't exist")
+        ns.abort(404, description=f"This id '{id}' doesen't exist")
    
     
