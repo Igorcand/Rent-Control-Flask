@@ -1,5 +1,5 @@
 from flask_restx import Api, Resource, fields, Namespace, reqparse
-from rental.models import  UserModel
+from rental.models import  User as UserModel
 from rental.ext.database import db
 from flask import request
 
