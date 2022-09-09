@@ -15,8 +15,6 @@ class User(db.Model):
 
 
 
-    def __repr__(self):
-        return self.username
 
 class Address(db.Model):
     __tablename__ = 'addresses'
@@ -31,8 +29,6 @@ class Address(db.Model):
 
     address_user = db.relationship('Property', backref='address')
 
-    def __repr__(self):
-        return '<Address %r>' % self.name
 
 class Tenant(db.Model):
     __tablename__ = 'tenants'
@@ -49,8 +45,6 @@ class Tenant(db.Model):
 
     tenant_user = db.relationship('Property', backref='tenant')
 
-    def __repr__(self):
-        return '<Tenant %r>' % self.username
 
 class Property(db.Model):
     __tablename__ = 'properties'
@@ -63,7 +57,3 @@ class Property(db.Model):
     address_id = db.Column(db.Integer, db.ForeignKey('addresses.id'))
     tenant_id = db.Column(db.Integer, db.ForeignKey('tenants.id'))
 
-
-
-    def __repr__(self):
-        return '<Property %r>' % self.username
