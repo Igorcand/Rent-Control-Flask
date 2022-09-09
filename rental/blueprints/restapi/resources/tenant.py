@@ -67,6 +67,7 @@ class TenantResource(Resource):
         
     
     @ns.marshal_with(tenant_model, code=200, envelope='tenant')
+    @ns.expect(tenant_model)
     def put(self,id):
 
         ''' Update a book'''

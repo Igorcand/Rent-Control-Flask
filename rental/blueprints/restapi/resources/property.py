@@ -64,6 +64,7 @@ class PropertyResource(Resource):
         
     
     @ns.marshal_with(property_model, code=200, envelope='property')
+    @ns.expect(property_model)
     def put(self,id):
 
         ''' Update a book'''

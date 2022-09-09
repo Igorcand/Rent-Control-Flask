@@ -11,7 +11,7 @@ user_model = ns.model('User',
     'name': fields.String(description='User name'),
     'username': fields.String(description='Username'),
     'email': fields.String(description='User email'),
-    'password': fields.Integer(description='User password'),
+    'password': fields.String(description='User password'),
 })
 
 
@@ -53,6 +53,7 @@ class UserResource(Resource):
         
     
     @ns.marshal_with(user_model, code=200, envelope='user')
+    @ns.expect(user_model)
     def put(self,id):
 
         ''' Update a book'''

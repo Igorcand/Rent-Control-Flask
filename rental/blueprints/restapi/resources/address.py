@@ -63,6 +63,7 @@ class AddressResource(Resource):
         
     
     @ns.marshal_with(address_model, code=200, envelope='address')
+    @ns.expect(address_model)
     def put(self,id):
 
         ''' Update a book'''
