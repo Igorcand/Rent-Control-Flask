@@ -1,8 +1,10 @@
 from flask import Blueprint
-from .products.routes import bp as product
+from .customer.routes import bp as customer
+from .address.routes import bp as address
 
 webui = Blueprint("webui", __name__, template_folder="templates")
-webui.register_blueprint(product)
+webui.register_blueprint(customer)
+webui.register_blueprint(address)
 
 
 def init_app(app):
