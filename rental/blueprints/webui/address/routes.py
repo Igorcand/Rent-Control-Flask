@@ -26,7 +26,7 @@ def add_address():
 def addresses():
     if 'email' not in session:
         flash(f'Please login first', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('webui.customer.log'))
     email = session['email']
     user = UserModel.query.filter_by(email=email).first()
     user_id = user.id
