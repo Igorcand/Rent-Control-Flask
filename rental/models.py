@@ -21,7 +21,7 @@ class User(db.Model):
 class Address(db.Model):
     __tablename__ = 'addresses'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    street = db.Column(db.String(50), unique=True)
+    street = db.Column(db.String(50), unique=False)
     number = db.Column(db.Integer, unique=False)
     city = db.Column(db.String(50), unique=False)
     state = db.Column(db.String(50), unique=False)
