@@ -3,9 +3,6 @@
 
 {% block content %}
 {% include 'navbar.html' %}
-
-  
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
     <section class="vh-100 gradient-custom">
         <div class="container py-5 h-100">
           <div class="row ">
@@ -14,44 +11,28 @@
               <div class="card shadow-2-strong card-registration" style="border-radius: 15px; width:60em">
                 <div class="card-body p-4 p-md-5">
                   <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Endereços cadastrados</h3>
-                  <table class="table table-sm table-condensed table-striped table-hover table-responsive">
-                    <thead>
-                      <th>#</th>
-                      <th>Name</th>
-                      <th>Age</th>
-                      <th>CPF</th>
-                      <th>Phone</th>
-                      <th>Payment</th>
-                      <th>Entry</th>
-                      <th>Email</th>
-                      <th>Activate</th>
-                      <th>Edit</th>
-                      <th>Delete</th>
-
-
-                    </thead>
-                    <tbody>
+                  
                       {% if tenants %}
                       {% for tenant in tenants %}
-                      <tr>
-                        <td>{{tenant.id}}</td>
-                        <td>{{tenant.name}}</td>
-                        <td>{{tenant.age}}</td>
-                        <td>{{tenant.cpf}}</td>
-                        <td>{{tenant.phone}}</td>
-                        <td>{{tenant.payment}}</td>
-                        <td>{{tenant.entry}}</td>
-                        <td>{{tenant.email}}</td>
-                        <td>{{tenant.activate}}</td>
-                        <td>
-                          <a href="{{url_for('webui.tenant.updatetenant', id=tenant.id)}}" class="btn btn-sm btn-outline-info"> Edit</a>
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal-{{tenant.id}}">
+                      <div class="card text-center mb-3">
+                        <div class="card-header">
+                          <h5 class="card-title">{{tenant.name}} </h5>
+                        
+                        </div>
+                        <div class="card-body">
+                        <ul class="list-group list-group-flush mb-3">
+                          <li class="list-group-item"><p class="lead">Valor do aluguel: {{tenant.payment}}</p> </li>
+                          <li class="list-group-item"><p class="lead">Mês de entrada: {{tenant.entry}}</p></li>
+                          <li class="list-group-item"><p class="lead">Dia de Vencimento: {{tenant.expiration}}</p></li>
+                          <li class="list-group-item"><p class="lead">Status: {{tenant.activate}}</p></li>
+
+                        </ul>
+                        <a href="{{url_for('webui.tenant.updatetenant', id=tenant.id)}}" class="btn btn-sm btn-outline-info"> Edit</a>
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal-{{tenant.id}}">
                           Delete
                         </button>
-                      </td>
-                      </tr>
+                        </div>
+                      </div>
 
 
                         <!--============= MODEL ===================-->
@@ -82,8 +63,6 @@
 
                       {% endfor %}
                       {% endif %}
-                    </tbody>
-                  </table>
                   <a href="{{url_for('webui.tenant.add_tenant')}}">Adicionar Inquilino</a>
                 </div>
               </div>
@@ -92,7 +71,6 @@
           </div>
         </div>
     </section>
-</main>
       
   
 
