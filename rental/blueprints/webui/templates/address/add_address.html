@@ -4,81 +4,78 @@
 {% block content %}
 {% include 'navbar.html' %}
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-            <section class="vh-100 gradient-custom">
-                <div class="container py-5 h-100">
-                  <div class="row justify-content-center align-items-center h-100">
-                    <div class="col-12 col-lg-9 col-xl-7">
-                      <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-                        <div class="card-body p-4 p-md-5">
-                          <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Adicionar endereços</h3>
-                          <form method="post">
-                            {% from "_formhelpers.html" import render_field %}
-                            <div class="row">
-                              <div class="col-md-6 mb-4">
-              
-                                <div class="form-outline">
-                                    {{ render_field(form.street, class="form-control") }}
-                                </div>
-              
-                              </div>
-                              <div class="col-md-6 mb-4">
-              
-                                <div class="form-outline">
-                                    {{ render_field(form.number, class="form-control") }}
-                                </div>
-              
-                              </div>
-                            </div>
-              
-                            <div class="row">
-                              <div class="col-md-6 mb-4 d-flex align-items-center">
-              
-                                <div class="form-outline datepicker w-100">
-                                    {{ render_field(form.city, class="form-control") }}
-                                </div>
-              
-                              </div>
-                              <div class="col-md-6 mb-4">
-              
-                                {{ render_field(form.state, class="form-control") }}
-              
-                              </div>
-                            </div>
-              
-                            <div class="row">
-                              <div class="col-md-6 mb-4 pb-2">
-              
-                                <div class="form-outline">
-                                    {{ render_field(form.country, class="form-control") }}
-                                </div>
-              
-                              </div>
-                              <div class="col-md-6 mb-4 pb-2">
-              
-                                <div class="form-outline">
-                                  {{ render_field(form.zipcode, class="form-control") }}
-                                </div>
-              
-                              </div>
-                            </div>
-              
-                            
-              
-                            <div class="mt-4 pt-2">
-                                <input type="submit" value="Register" class="btn btn-primary btn-lg">
-                            </div>
-              
-                          </form>
-                        </div>
-                      </div>
+        
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row justify-content-center align-items-center h-100">
+        <div class="col-12 col-lg-9 col-xl-7">
+          <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+            <div class="card-body p-4 p-md-5">
+              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Adicionar endereços</h3>
+              <form method="post">
+                {% from "_formhelpers.html" import render_field %}
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+  
+                    <div class="form-outline">
+                        {{ render_field(form.street, class="form-control") }}
                     </div>
+  
+                  </div>
+                  <div class="col-md-6 mb-4">
+  
+                    <div class="form-outline">
+                        {{ render_field(form.number, class="form-control") }}
+                    </div>
+  
                   </div>
                 </div>
-            </section>
-        </main>
+  
+                <div class="row">
+                  <div class="col-md-6 mb-4 d-flex align-items-center">
+  
+                    <div class="form-outline datepicker w-100">
+                        {{ render_field(form.city, class="form-control") }}
+                    </div>
+  
+                  </div>
+                  <div class="col-md-6 mb-4">
+  
+                    {{ render_field(form.state, class="form-control") }}
+  
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="col-md-6 mb-4 pb-2">
+  
+                    <div class="form-outline">
+                        {{ render_field(form.country, class="form-control") }}
+                    </div>
+  
+                  </div>
+                  <div class="col-md-6 mb-4 pb-2">
+  
+                    <div class="form-outline">
+                      {{ render_field(form.zipcode, class="form-control") }}
+                    </div>
+  
+                  </div>
+                </div>
+  
+                
+  
+                <div class="mt-4 pt-2">
+                    <input type="submit" value="Register" class="btn btn-primary btn-lg">
+                </div>
+  
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+</section>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
