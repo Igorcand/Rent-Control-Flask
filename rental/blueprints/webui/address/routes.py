@@ -1,4 +1,3 @@
-from this import s
 from flask import render_template, Blueprint, request, redirect, url_for, flash, session
 from rental.ext.database import db
 from .form import AddressForm

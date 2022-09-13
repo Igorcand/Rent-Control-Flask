@@ -40,7 +40,6 @@ def home():
     year, month, day = data.split('-')
     print(f'year = {year}')
     print(f'month = {month}')
-    print(f'day = {day}')
 
-    return render_template('index.html', day=day, month=month, year=year) 
+    return render_template('index.html', day=day, month=month) 
 

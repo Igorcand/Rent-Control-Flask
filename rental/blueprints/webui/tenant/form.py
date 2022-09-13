@@ -9,5 +9,6 @@ class TenantForm(FlaskForm):
     phone = IntegerField('Phone', [validators.DataRequired()])
     payment = DecimalField('Payment', [validators.DataRequired()])
     entry = IntegerField('Entry', [validators.DataRequired()])
+    expiration = IntegerField('Expiration', [validators.DataRequired()])
     email = StringField('Email', [validators.DataRequired()])
     activate = BooleanField('Activate', [validators.DataRequired()])

@@ -1,4 +1,3 @@
-from this import s
 from flask import render_template, Blueprint, request, redirect, url_for, flash, session
 from rental.ext.database import db
 from .form import TenantForm
@@ -16,7 +15,7 @@ def add_tenant():
     user_id = user.id
     
     if request.method == 'POST':
-        tenant = TenantModel(name=form.name.data, age=form.age.data, cpf=form.cpf.data, phone=form.phone.data, payment=form.payment.data, entry=form.entry.data, email=form.email.data, activate=form.activate.data, user_id=user_id)
+        tenant = TenantModel(name=form.name.data, age=form.age.data, cpf=form.cpf.data, phone=form.phone.data, payment=form.payment.data, entry=form.entry.data, expiration=form.expiration.data, email=form.email.data, activate=form.activate.data, user_id=user_id)
         db.session.add(tenant)
         db.session.commit()
         return redirect(url_for('webui.tenant.tenants'))
@@ -46,6 +45,7 @@ def updatetenant(id):
         tenant.phone = form.phone.data
         tenant.payment = form.payment.data
         tenant.entry = form.entry.data
+        tenant.expiration = form.expiration.data
         tenant.email = form.email.data
         tenant.activate = form.activate.data
 
@@ -60,6 +60,7 @@ def updatetenant(id):
     form.phone.data = tenant.phone
     form.payment.data = tenant.payment
     form.entry.data = tenant.entry
+    form.expiration.data = tenant.expiration
     form.email.data = tenant.email
     form.activate.data = tenant.activate
 

@@ -1,5 +1,4 @@
-from this import s
-from unittest import result
+from datetime import datetime
 from flask import render_template, Blueprint, request, redirect, url_for, flash, session
 from rental.blueprints.webui.address.routes import addresses
 from rental.ext.database import db
@@ -41,8 +40,19 @@ def property():
     user = UserModel.query.filter_by(email=email).first()
     user_id = user.id
     properties = PropertyModel.query.filter_by(user_id=user_id).all()
-    name_street = 0
-    name_tenant = 0
+    print(len(properties))
+
+    data = datetime.today().strftime('%Y-%m-%d')
+    year, month, day = data.split('-')
+
+    for prop in properties:
+        result_tenant = db.session.query(PropertyModel, TenantModel).join(TenantModel).filter_by(user_id=user_id, id=prop.tenant_id)
+        for p, t in result_tenant:
+            if int(day) > int(t.entry):
+                p.pendancy = True
+
+
+
     return render_template('property/property.html', properties=properties)
 
 

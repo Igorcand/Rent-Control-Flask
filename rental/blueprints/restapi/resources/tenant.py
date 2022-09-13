@@ -15,6 +15,7 @@ tenant_model = ns.model('Tenat',
     'phone': fields.Integer(description='Tenat phone '),
     'payment': fields.Float(description='Tenat payment '),
     'entry': fields.Integer(description='Tenat entry'),
+    'expiration': fields.Integer(description='Tenat expiration'),
     'email': fields.String(description='Tenat entry'),
     'activate': fields.Boolean(description='activate'),
     'user_id': fields.Integer(description='user id'),
@@ -44,11 +45,12 @@ class Tenant(Resource):
         phone = data.get('phone')
         payment = data.get('payment')
         entry = data.get('entry')
+        expiration = data.get('expiration')
         email = data.get('email')
         activate = data.get('activate')
         user_id = data.get('user_id')
 
-        tenant = TenantModel(name=name, age=age, cpf=cpf, phone=phone, payment=payment, entry=entry, email=email,activate=activate, user_id=user_id)
+        tenant = TenantModel(name=name, age=age, cpf=cpf, phone=phone, payment=payment, entry=entry, expiration=expiration,email=email,activate=activate, user_id=user_id)
         db.session.add(tenant)
         db.session.commit()
         return address
@@ -81,6 +83,7 @@ class TenantResource(Resource):
             tenant.phone=data.get('phone')
             tenant.payment=data.get('payment')
             tenant.entry=data.get('entry')
+            tenant.expiration=data.get('expiration')
             tenant.email=data.get('email')
             tenant.activate=data.get('activate')
             db.session.commit()
@@ -96,11 +99,12 @@ class TenantResource(Resource):
             phone = data.get('phone')
             payment = data.get('payment')
             entry = data.get('entry')
+            expiration = data.get('expiration')
             email = data.get('email')
             activate = data.get('activate')
             user_id = data.get('user_id')
 
-            tenant = TenantModel(name=name, age=age, cpf=cpf, phone=phone, payment=payment, entry=entry, email=email,activate=activate, user_id=user_id)
+            tenant = TenantModel(name=name, age=age, cpf=cpf, phone=phone, payment=payment, entry=entry, expiration=expiration,email=email,activate=activate, user_id=user_id)
             db.session.add(tenant)
             db.session.commit()
 
