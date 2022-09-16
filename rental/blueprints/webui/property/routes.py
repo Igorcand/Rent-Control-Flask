@@ -40,20 +40,62 @@ def property():
     user = UserModel.query.filter_by(email=email).first()
     user_id = user.id
     properties = PropertyModel.query.filter_by(user_id=user_id).all()
-    print(len(properties))
 
     data = datetime.today().strftime('%Y-%m-%d')
     year, month, day = data.split('-')
 
+    day = int(day)
+    month = int(month)
+
+    data_property = {}
+
+    loop = 0
     for prop in properties:
         result_tenant = db.session.query(PropertyModel, TenantModel).join(TenantModel).filter_by(user_id=user_id, id=prop.tenant_id)
+        result_address = db.session.query(PropertyModel, AddressModel).join(AddressModel).filter_by(user_id=user_id, id=prop.address_id)
+
+        data_tenant = {}
         for p, t in result_tenant:
-            if int(day) > int(t.entry):
-                p.pendancy = True
+            
+            data_tenant['id_property'] = p.id
+            data_tenant['name_property'] = p.name
+            data_tenant['pendency'] = p.pendency
+            data_tenant['name_tenant'] = t.name
+            data_tenant['payment'] = t.payment
+            data_tenant['expiration'] = t.expiration
+            data_tenant['last_month'] = p.last_month
+        
+        for p, a in result_address:
+            data_tenant['address'] = f'{a.street},{a.number},{a.city}'
 
+        data_property[loop] = data_tenant
 
+        loop+=1
 
-    return render_template('property/property.html', properties=properties)
+    for key, value in data_property.items():
+        expiration = value['expiration']
+        last_month = value['last_month']
+        id_prop = value['id_property']
+        # NO DIA DO VENCIMENTO
+        if expiration == day:
+            background = 'amarelo'
+        # NO MES DO PAGAMENTO OU O MES ESTÁ INICIANDO E AINDA NÃO CHEGOU O DIA DO VENCIMENTO
+        elif last_month == month or (last_month == month-1 and day < expiration ):
+            background = 'verde'
+        elif expiration < day and last_month < month:
+            background = 'vermelho'
+            prop = PropertyModel.query.filter_by(user_id=user_id, id=id_prop).first()
+            prop.pendency = True
+            db.session.commit()
+
+        else:
+            background = 'vermelho'
+            prop = PropertyModel.query.filter_by(user_id=user_id, id=id_prop).first()
+            prop.pendency = True
+            db.session.commit()
+        value['background'] = background
+
+    return render_template('property/property.html', data_property=data_property, day=day, month=month)
 
 
 
@@ -81,11 +123,17 @@ def updateproperty(id):
 
     
     form = PropertyForm(request.form)
+    data = datetime.today().strftime('%Y-%m-%d')
+    year, month, day = data.split('-')
     if request.method == 'POST':
         property.name = form.name.data 
         property.iptu = form.iptu.data
         property.value = form.value.data
         property.pendency = form.pendency.data
+        if property.pendency==False:
+            property.last_month = int(month)
+        else:
+            property.last_month = property.last_month -1
         address = request.form.get('address')
         tenant = request.form.get('tenant')
         property.address_id = address
