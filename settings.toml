@@ -1,4 +1,5 @@
 [default]
+TITLE = "Rent Control"
 DEBUG = false
 DEBUG_TB_INTERCEPT_REDIRECTS = false
 EXTENSIONS = [
