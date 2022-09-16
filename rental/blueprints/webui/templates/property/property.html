@@ -5,87 +5,139 @@
 {% include 'navbar.html' %}
 
   
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+
     <section class="vh-100 gradient-custom">
         <div class="container py-5 h-100">
           <div class="row ">
             <div class="col-md-1"></div>
             <div class="col-md-10">
+              <h1 class="h1 text-center p-3 border rounded">Dia de hoje: {{day}} / {{month}}</h1>
               <div class="card shadow-2-strong card-registration" style="border-radius: 15px; width:60em">
                 <div class="card-body p-4 p-md-5">
-                  <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Endereços cadastrados</h3>
-                  <table class="table table-sm table-condensed table-striped table-hover table-responsive">
-                    <thead>
-                      <th>#</th>
-                      <th>Name</th>
-                      <th>Value</th>
-                      <th>IPTU</th>
-                      <th>Pendancy</th>
-                      <th>Address_id</th>
-                      <th>tenant_id</th>
-                      <th>Edit</th>
-                      <th>Delete</th>
+                  <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Alugueis cadastrados</h3>
+                  
+                      {% if data_property %}
+                      {% for key, value in data_property.items() %}
+                      {% if value['background'] == 'amarelo' %}
+                      <div class="card text-center mb-3" style="background-color: #fdfd96;">
+                        <div class="card-header">
+                          <h5 class="card-title">{{value['name_property']}} </h5>
+                        
+                        </div>
+                        <div class="card-body">
+                        <ul class="list-group list-group-flush mb-3">
+                          <div class="row">
+                            <div class="col-md-6">
+                            <li class="list-group-item"><p class="lead">Nome Inquilino: {{value['name_tenant']}}</p> </li>
+                            <li class="list-group-item"><p class="lead">Valor Aluguel: {{value['payment']}}</p></li>
+                            <li class="list-group-item"><p class="lead">Endereço: {{value['address']}}</p></li>
+                            
+                            
+                          </div>
+                          <div class="col-md-6">
+                            <li class="list-group-item"><p class="lead">Dia de Vencimento: {{value['expiration']}}</p></li>
+                          <li class="list-group-item"><p class="lead">Status: Ultimo dia para pagamento!</p></li>
+                          <li class="list-group-item"><p class="lead">Ultimo pagamento: {{value['last_month']}}</p></li>
+                          
+
+                          
+                        </div>
+                      </div>
 
 
-                    </thead>
-                    <tbody>
-                      {% if properties %}
-                      {% for property in properties %}
-                      {% if property.pendency== True %}
-                      <tr style="background-color: #ff6961;">
-                        <td>{{property.id}}</td>
-                        <td>{{property.name}}</td>
-                        <td>{{property.value}}</td>
-                        <td>{{property.iptu}}</td>
-                        <td>{{property.pendency}}</td>
-                        <td>{{property.address_id}}</td>
-                        <td>{{property.tenant_id}}</td>
-                        <td>
-                          <a href="{{url_for('webui.property.updateproperty', id=property.id)}}" class="btn btn-sm btn-info"> Edit</a>
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal-{{property.id}}">
+                        </ul>
+                        <a href="{{url_for('webui.property.updateproperty', id=value['id_property'])}}" class="btn btn-sm btn-info"> Edit</a>
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal-{{value['id_property']}}">
                           Delete
                         </button>
-                      </td>
-                      </tr>
+                        </div>
+                      </div>
+
+                      {% elif value['background'] == 'vermelho'%}
+                      <div class="card text-center mb-3" style="background-color: #ff6961;">
+                        <div class="card-header">
+                          <h5 class="card-title">{{value['name_property']}} </h5>
+                        
+                        </div>
+                        <div class="card-body">
+                        <ul class="list-group list-group-flush mb-3">
+                          <div class="row">
+                            <div class="col-md-6">
+                            <li class="list-group-item"><p class="lead">Nome Inquilino: {{value['name_tenant']}}</p> </li>
+                            <li class="list-group-item"><p class="lead">Valor Aluguel: {{value['payment']}}</p></li>
+                            <li class="list-group-item"><p class="lead">Endereço: {{value['address']}}</p></li>
+                            
+                          </div>
+                          <div class="col-md-6">
+                            <li class="list-group-item"><p class="lead">Dia de Vencimento: {{value['expiration']}}</p></li>
+                            <li class="list-group-item"><p class="lead">Status: Aluguel pendente!</p></li>
+                            <li class="list-group-item"><p class="lead">Ultimo pagamento: {{value['last_month']}}</p></li>
+                            
+                          </div>
+                        </div>
+
+                        </ul>
+                        <a href="{{url_for('webui.property.updateproperty', id=value['id_property'])}}" class="btn btn-sm btn-info"> Edit</a>
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal-{{value['id_property']}}">
+                          Delete
+                        </button>
+                        </div>
+                      </div>
+                          
                       {% else %}
-                      <tr style="background-color: #90ee90;">
-                        <td>{{property.id}}</td>
-                        <td>{{property.name}}</td>
-                        <td>{{property.value}}</td>
-                        <td>{{property.iptu}}</td>
-                        <td>{{property.pendency}}</td>
-                        <td>{{property.address_id}}</td>
-                        <td>{{property.tenant_id}}</td>
-                        <td>
-                          <a href="{{url_for('webui.property.updateproperty', id=property.id)}}" class="btn btn-sm btn-info"> Edit</a>
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal-{{property.id}}">
-                          Delete
-                        </button>
-                      </td>
-                      </tr>
+                        <div class="card text-center mb-3" style="background-color: #90ee90;">
+                          <div class="card-header">
+                            <h5 class="card-title">{{value['name_property']}} </h5>
+                          
+                          </div>
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <ul class="list-group list-group-flush mb-3">
+                                  <li class="list-group-item"><p class="lead">Nome Inquilino: {{value['name_tenant']}}</p> </li>
+                                  <li class="list-group-item"><p class="lead">Valor Aluguel: {{value['payment']}}</p></li>
+                                  <li class="list-group-item"><p class="lead">Endereço: {{value['address']}}</p></li>
+                                  
+        
+                                </ul>
+                              </div>
+
+                              <div class="col-md-6">
+                                <ul class="list-group list-group-flush mb-3">
+                                  
+                                  <li class="list-group-item"><p class="lead">Dia de Vencimento: {{value['expiration']}}</p></li>
+                                  <li class="list-group-item"><p class="lead">Status: Aluguel em dia!</p></li>
+                                  <li class="list-group-item"><p class="lead">Ultimo pagamento: {{value['last_month']}}</p></li>
+        
+                                </ul>
+                              </div>
+                            </div>
+                            
+                          <a href="{{url_for('webui.property.updateproperty', id=value['id_property'])}}" class="btn btn-sm btn-info"> Edit</a>
+                          <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal-{{value['id_property']}}">
+                            Delete
+                          </button>
+                          </div>
+                        </div>
                       {% endif %}
 
 
                         <!--============= MODEL ===================-->
-<div class="modal fade" id="exampleModal-{{property.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal-{{value['id_property']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
 <div class="modal-content">
 <div class="modal-header">
-  <h5 class="modal-title" id="exampleModalLabel">{{ property.name }}</h5>
+  <h5 class="modal-title" id="exampleModalLabel">{{ value['name_property']}}</h5>
   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-  <p class="text-danger">Are you Sure that you want to delete this brand ({{ property.name }}) </p>
+  <p class="text-danger">Are you Sure that you want to delete this brand ({{ value['name_property'] }}) </p>
   </div>
   <div class="modal-footer">
   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-  <form action="{{url_for('webui.property.deleteproperty',id=property.id)}}" method="post">
+  <form action="{{url_for('webui.property.deleteproperty',id=value['id_property'])}}" method="post">
     <button type="submit" class="btn btn-danger">Delete</button>
   </form>
   
@@ -108,7 +160,6 @@
           </div>
         </div>
     </section>
-</main>
       
   
 

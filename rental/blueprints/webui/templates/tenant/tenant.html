@@ -10,7 +10,7 @@
             <div class="col-md-10">
               <div class="card shadow-2-strong card-registration" style="border-radius: 15px; width:60em">
                 <div class="card-body p-4 p-md-5">
-                  <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Endereços cadastrados</h3>
+                  <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Inquilinos cadastrados</h3>
                   
                       {% if tenants %}
                       {% for tenant in tenants %}
@@ -20,13 +20,24 @@
                         
                         </div>
                         <div class="card-body">
-                        <ul class="list-group list-group-flush mb-3">
-                          <li class="list-group-item"><p class="lead">Valor do aluguel: {{tenant.payment}}</p> </li>
-                          <li class="list-group-item"><p class="lead">Mês de entrada: {{tenant.entry}}</p></li>
-                          <li class="list-group-item"><p class="lead">Dia de Vencimento: {{tenant.expiration}}</p></li>
-                          <li class="list-group-item"><p class="lead">Status: {{tenant.activate}}</p></li>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item"><p class="lead">Valor do aluguel: {{tenant.payment}}</p> </li>
+                                <li class="list-group-item"><p class="lead">Mês de entrada: {{tenant.entry}}</p></li>
+                                
+                              </ul>
+                            </div>
 
-                        </ul>
+                            <div class="col-md-6">
+                              <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item"><p class="lead">Dia de Vencimento: {{tenant.expiration}}</p></li>
+                                <li class="list-group-item"><p class="lead">Status: {{tenant.activate}}</p></li>
+      
+                              </ul>
+                            </div>
+                          </div>
+                        
                         <a href="{{url_for('webui.tenant.updatetenant', id=tenant.id)}}" class="btn btn-sm btn-outline-info"> Edit</a>
                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal-{{tenant.id}}">
                           Delete
