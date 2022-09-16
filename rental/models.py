@@ -54,6 +54,7 @@ class Property(db.Model):
     iptu = db.Column(db.Integer, unique=False, nullable=False)
     value = db.Column(db.Float, unique=False, nullable=False)
     pendency = db.Column(db.Boolean, unique=False, nullable=False)
+    last_month = db.Column(db.Integer, unique=False, default=0)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     address_id = db.Column(db.Integer, db.ForeignKey('addresses.id'))
     tenant_id = db.Column(db.Integer, db.ForeignKey('tenants.id'))
