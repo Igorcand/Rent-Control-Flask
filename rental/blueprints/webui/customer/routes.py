@@ -5,7 +5,7 @@ from rental.models import User as UserModel
 from rental.ext.crypt import bcrypt
 from rental.ext.database import db
 
-bp = Blueprint("products", __name__)
+bp = Blueprint("customer", __name__)
 
 @bp.route('/', methods=['GET', 'POST'])
 def log():
@@ -15,7 +15,7 @@ def log():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             session['email'] = form.email.data 
             flash(f"Welcome, {form.email.data}. You're logedin now", 'success')
-            return redirect(request.args.get('next') or url_for('webui.products.home'))
+            return redirect(request.args.get('next') or url_for('webui.property.property'))
         else:
             flash(f'Wrong password plese try again', 'danger')
 
@@ -31,15 +31,8 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash(f'Welcome, {form.name.data}. Thanks for registring', 'success')
-        return redirect(request.args.get('next') or url_for('webui.products.home'))
+        return redirect(request.args.get('next') or url_for('webui.property.property'))
     return render_template('customer/register.html', form=form) 
 
-@bp.route('/home')
-def home():
-    data = datetime.today().strftime('%Y-%m-%d')
-    year, month, day = data.split('-')
-    print(f'year = {year}')
-    print(f'month = {month}')
 
-    return render_template('index.html', day=day, month=month) 
 
