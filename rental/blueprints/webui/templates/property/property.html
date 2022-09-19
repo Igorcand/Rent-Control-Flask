@@ -11,10 +11,10 @@
           <div class="row ">
             <div class="col-md-1"></div>
             <div class="col-md-10">
-              <h1 class="h1 text-center p-3 border rounded">Dia de hoje: {{day}} / {{month}}</h1>
+              <h1 class="h1 text-center p-3 border rounded">Today's day: {{day}} / {{month}}</h1>
               <div class="card shadow-2-strong card-registration" style="border-radius: 15px; width:60em">
                 <div class="card-body p-4 p-md-5">
-                  <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Alugueis cadastrados</h3>
+                  <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registred rents</h3>
                   
                       {% if data_property %}
                       {% for key, value in data_property.items() %}
@@ -28,16 +28,16 @@
                         <ul class="list-group list-group-flush mb-3">
                           <div class="row">
                             <div class="col-md-6">
-                            <li class="list-group-item"><p class="lead">Nome Inquilino: {{value['name_tenant']}}</p> </li>
-                            <li class="list-group-item"><p class="lead">Valor Aluguel: {{value['payment']}}</p></li>
-                            <li class="list-group-item"><p class="lead">Endereço: {{value['address']}}</p></li>
+                            <li class="list-group-item"><p class="lead">Tenant name: {{value['name_tenant']}}</p> </li>
+                            <li class="list-group-item"><p class="lead">Rent value: {{value['payment']}}</p></li>
+                            <li class="list-group-item"><p class="lead">Address: {{value['address']}}</p></li>
                             
                             
                           </div>
                           <div class="col-md-6">
-                            <li class="list-group-item"><p class="lead">Dia de Vencimento: {{value['expiration']}}</p></li>
-                          <li class="list-group-item"><p class="lead">Status: Ultimo dia para pagamento!</p></li>
-                          <li class="list-group-item"><p class="lead">Ultimo pagamento: {{value['last_month']}}</p></li>
+                            <li class="list-group-item"><p class="lead">Expiration Day: {{value['expiration']}}</p></li>
+                          <li class="list-group-item"><p class="lead">Status: Last day for payment!</p></li>
+                          <li class="list-group-item"><p class="lead">Last payment: {{value['last_month']}}</p></li>
                           
 
                           
@@ -63,15 +63,15 @@
                         <ul class="list-group list-group-flush mb-3">
                           <div class="row">
                             <div class="col-md-6">
-                            <li class="list-group-item"><p class="lead">Nome Inquilino: {{value['name_tenant']}}</p> </li>
-                            <li class="list-group-item"><p class="lead">Valor Aluguel: {{value['payment']}}</p></li>
-                            <li class="list-group-item"><p class="lead">Endereço: {{value['address']}}</p></li>
+                            <li class="list-group-item"><p class="lead">Tenant name: {{value['name_tenant']}}</p> </li>
+                            <li class="list-group-item"><p class="lead">Rent value: {{value['payment']}}</p></li>
+                            <li class="list-group-item"><p class="lead">Address: {{value['address']}}</p></li>
                             
                           </div>
                           <div class="col-md-6">
-                            <li class="list-group-item"><p class="lead">Dia de Vencimento: {{value['expiration']}}</p></li>
-                            <li class="list-group-item"><p class="lead">Status: Aluguel pendente!</p></li>
-                            <li class="list-group-item"><p class="lead">Ultimo pagamento: {{value['last_month']}}</p></li>
+                            <li class="list-group-item"><p class="lead">Expiration Day: {{value['expiration']}}</p></li>
+                            <li class="list-group-item"><p class="lead">Status: Late rent!</p></li>
+                            <li class="list-group-item"><p class="lead">Last payment: {{value['last_month']}}</p></li>
                             
                           </div>
                         </div>
@@ -94,9 +94,9 @@
                             <div class="row">
                               <div class="col-md-6">
                                 <ul class="list-group list-group-flush mb-3">
-                                  <li class="list-group-item"><p class="lead">Nome Inquilino: {{value['name_tenant']}}</p> </li>
-                                  <li class="list-group-item"><p class="lead">Valor Aluguel: {{value['payment']}}</p></li>
-                                  <li class="list-group-item"><p class="lead">Endereço: {{value['address']}}</p></li>
+                                  <li class="list-group-item"><p class="lead">Tenant name: {{value['name_tenant']}}</p> </li>
+                                  <li class="list-group-item"><p class="lead">Rent value: {{value['payment']}}</p></li>
+                                  <li class="list-group-item"><p class="lead">Address: {{value['address']}}</p></li>
                                   
         
                                 </ul>
@@ -106,8 +106,8 @@
                                 <ul class="list-group list-group-flush mb-3">
                                   
                                   <li class="list-group-item"><p class="lead">Dia de Vencimento: {{value['expiration']}}</p></li>
-                                  <li class="list-group-item"><p class="lead">Status: Aluguel em dia!</p></li>
-                                  <li class="list-group-item"><p class="lead">Ultimo pagamento: {{value['last_month']}}</p></li>
+                                  <li class="list-group-item"><p class="lead">Status: Rent up to date!</p></li>
+                                  <li class="list-group-item"><p class="lead">Last payment: {{value['last_month']}}</p></li>
         
                                 </ul>
                               </div>
@@ -133,7 +133,7 @@
   </button>
 </div>
 <div class="modal-body">
-  <p class="text-danger">Are you Sure that you want to delete this brand ({{ value['name_property'] }}) </p>
+  <p class="text-danger">Are you Sure that you want to delete this property ({{ value['name_property'] }}) </p>
   </div>
   <div class="modal-footer">
   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -152,7 +152,7 @@
                       {% endif %}
                     </tbody>
                   </table>
-                  <a href="{{url_for('webui.property.add_property')}}">Adicionar Aluguel</a>
+                  <a href="{{url_for('webui.property.add_property')}}">Add new rent</a>
                 </div>
               </div>
             </div>

@@ -10,7 +10,7 @@
             <div class="col-md-10">
               <div class="card shadow-2-strong card-registration" style="border-radius: 15px; width:60em">
                 <div class="card-body p-4 p-md-5">
-                  <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Inquilinos cadastrados</h3>
+                  <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registered tenants</h3>
                   
                       {% if tenants %}
                       {% for tenant in tenants %}
@@ -23,15 +23,15 @@
                           <div class="row">
                             <div class="col-md-6">
                               <ul class="list-group list-group-flush mb-3">
-                                <li class="list-group-item"><p class="lead">Valor do aluguel: {{tenant.payment}}</p> </li>
-                                <li class="list-group-item"><p class="lead">Mês de entrada: {{tenant.entry}}</p></li>
+                                <li class="list-group-item"><p class="lead">Rent value: {{tenant.payment}}</p> </li>
+                                <li class="list-group-item"><p class="lead">Month of entry: {{tenant.entry}}</p></li>
                                 
                               </ul>
                             </div>
 
                             <div class="col-md-6">
                               <ul class="list-group list-group-flush mb-3">
-                                <li class="list-group-item"><p class="lead">Dia de Vencimento: {{tenant.expiration}}</p></li>
+                                <li class="list-group-item"><p class="lead">Expiration Day: {{tenant.expiration}}</p></li>
                                 <li class="list-group-item"><p class="lead">Status: {{tenant.activate}}</p></li>
       
                               </ul>
@@ -57,7 +57,7 @@
   </button>
 </div>
 <div class="modal-body">
-  <p class="text-danger">Are you Sure that you want to delete this brand ({{ tenant.name }}) </p>
+  <p class="text-danger">Are you Sure that you want to delete this tenant ({{ tenant.name }}) </p>
   </div>
   <div class="modal-footer">
   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -74,7 +74,7 @@
 
                       {% endfor %}
                       {% endif %}
-                  <a href="{{url_for('webui.tenant.add_tenant')}}">Adicionar Inquilino</a>
+                  <a href="{{url_for('webui.tenant.add_tenant')}}">Add new tenant</a>
                 </div>
               </div>
             </div>
