@@ -7,6 +7,84 @@ Essa aplicação foi desenvolvida e pensada após uma conversa com uma pessoa qu
 Em vista disso, pensei em desenvolver um controle de alugueis, em que todo mês a aplicação irá alertar quando o aluguel está vencido, em dia, ou está no ultimo dia para pagar, e a única coisa em que o usuário precisa é informar ao site se a aplicação está paga.
 Como o Framework Flask nos da a liberdade de criar a estrutura como quisermos, essa aplicação foi desenvolvida utilizando técnicas em que já havia utilizado em projetos isolados e uni todas em uma só, como a documentação da API, Página de Admin, Front-End e sistemas de factories e blueprints.
 
+## Structure
+
+```bash
+.
+├── rental_register  (MAIN PACKAGE)
+│   ├── blueprints  (BLUEPRINT FACTORIES)
+│   │   ├── __init__.py
+│   │   ├── restapi  (REST API)
+│   │   │    ├── __init__.py (REGISTER BLUEPRINTS)
+│   │   │	 ├── resources (CREATE A CLASS WITH METHODS CRUD ON REST API)
+│   │   │        └── __init__.py
+│   │   │        └── user.py
+│   │   │        └── property.py
+│   │   │        └── tenant.py
+│   │   │        └── address.py
+│   │   └── WebUI  (FRONT END)
+│   │   │    ├── __init__.py
+│   │   │    ├── Customer
+│   │   │    │   ├── route.py
+│   │   │    │   ├── forms.py
+│   │   │    │   ├── __init__.py
+│   │   │    ├── Property
+│   │   │    │   ├── route.py
+│   │   │    │   ├── forms.py
+│   │   │    │   ├── __init__.py
+│   │   │    ├── Tenant
+│   │   │    │   ├── route.py
+│   │   │    │   ├── forms.py
+│   │   │    ├── Address  
+│   │   │    │   ├── route.py
+│   │   │    │   ├── forms.py
+│   │   │    │   ├── __init__.py
+│   │   │    ├── static  
+│   │   │	 │   ├── CSS  
+│   │   │	 │   │   └── style.css
+│   │   │	 │   ├── JS  
+│   │   │	 │   │   └── script.js
+│   │   │	 │   ├── IMG  
+│   │   │    │       └── image.png
+│   │   │    ├── templates
+│   │   │	 │   ├── Customer  
+│   │   │	 │   │   └── log.html
+│   │   │	 │   │   └── register.html
+│   │   │	 │   ├── Property
+│   │   │	 │   │   └── property.html
+│   │   │	 │   │   └── add_property.html
+│   │   │	 │   │   └── update_property.html
+│   │   │	 │   ├── Address 
+│   │   │    │   │   └── address.html
+│   │   │    │   │   └── add_address.html
+│   │   │	 │   ├── Tenant 
+│   │   │    │   │   └── tenant.html
+│   │   │    │   │   └── add_tenant.html
+│   │   │    │   ├── _formhelpers.html
+│   │   │    │   └── _messages.html
+│   │   │    │   ├── layout.html
+│   │   │    │   └── navbar.html
+│   ├── ext (EXTENSION FACTORIES)
+│   │   ├── admin.py
+│   │   ├── auth.py
+│   │   ├── cli.py
+│   │   ├── config.py
+│   │   ├── crypt.py
+│   │   ├── database.py
+│   │   ├── migrate.py
+│   │   ├── search.py
+│   │   ├── toolbar.py
+│   │   ├── upload.py
+│   │   └── __init__.py
+│   ├── app.py  (APP FACTORIES)
+│   ├── models.py
+│   ├── __init__.py
+├── README.md
+├── requirements.txt
+├── LICENSE
+├── setup.py
+└── settings.toml  (SETTINGS)
+```
 
 ## Login and Register
 When the code is runned, you will need access with your email and password, if you didn't its registred you need click on register button and fill the form
