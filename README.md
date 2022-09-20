@@ -1,6 +1,6 @@
 # Rental registring and control
 
-[![NPM](https://img.shields.io/npm/l/react)](https://github.com/Igorcand/Pydaria-Flask/blob/master/LICENSE) 
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/Igorcand/Rent-Control-Flask/blob/master/LICENSE) 
 
 # About the Project
 Essa aplicação foi desenvolvida e pensada após uma conversa com uma pessoa que me disse que tem imóveis que estão alugados e que faz o controle dos alugueis utilizando papel e caneta, e que todo mês tem que lembrar se os respectivos inquilinos já efetuaram o pagamento.
