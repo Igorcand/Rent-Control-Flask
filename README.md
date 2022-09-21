@@ -3,10 +3,11 @@
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/Igorcand/Rent-Control-Flask/blob/master/LICENSE) 
 
 # About the Project
-Essa aplicação foi desenvolvida e pensada após uma conversa com uma pessoa que me disse que tem imóveis que estão alugados e que faz o controle dos alugueis utilizando papel e caneta, e que todo mês tem que lembrar se os respectivos inquilinos já efetuaram o pagamento.
-Em vista disso, pensei em desenvolver um controle de alugueis, em que todo mês a aplicação irá alertar quando o aluguel está vencido, em dia, ou está no ultimo dia para pagar, e a única coisa em que o usuário precisa é informar ao site se a aplicação está paga.
-Como o Framework Flask nos da a liberdade de criar a estrutura como quisermos, essa aplicação foi desenvolvida utilizando técnicas em que já havia utilizado em projetos isolados e uni todas em uma só, como a documentação da API, Página de Admin, Front-End e sistemas de factories e blueprints.
+This application was developed and thought about after some conversation with some people that told me that has rented properties and do the rent control using paper and pen, and every month have to remember if the respective tenants already make the payment.
 
+Because of this, I thought to develop some rent control, and every month the application will alert when the rent is done, late, or in deadline to pay, and the only thing that the user needs is to inform the site if the rent is paid.
+
+Like the Flask Framework give us free to create the structure like we want, this Project was developed using skills that I already used in isolated projects and I joined all skills in one application, like API docs, Admin Page, Front-end, factories systems, and blueprints.
 ## Structure
 
 ```bash
