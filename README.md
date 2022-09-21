@@ -86,6 +86,10 @@ Como o Framework Flask nos da a liberdade de criar a estrutura como quisermos, e
 └── settings.toml  (SETTINGS)
 ```
 
+
+## Database rlationship 
+![Mobile 1](https://github.com/Igorcand/Rent-Control-Flask/blob/master/assets/database.png)
+
 ## Login and Register
 When the code is runned, you will need access with your email and password, if you didn't its registred you need click on register button and fill the form
 
