@@ -133,3 +133,4 @@ examples/
 migrations/
 .secrets.toml
 rental.db
+database.sql
