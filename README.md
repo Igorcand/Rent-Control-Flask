@@ -115,7 +115,7 @@ After add content, this pages will be the layout, showing the informations
 ![Mobile 1](https://github.com/Igorcand/Rent-Control-Flask/blob/master/assets/registred_address.png) 
 
 ## Main page running with content
-This page is a application inteligence that after registred informations about, will show a card with 3 diferents colors. If the rent are late, the actual day is bigger than day that was registred on Tenant, the color will be RED. If the actual day is iqual than day that was registred on Tenant, its the last day to do the payment, so the color will be YELLOW. And if you payed the rent, you need mark off the button editing the rent, and the payement its done for 1 month, and the color will be GREEN.
+This page is an inteligence application  that after registred informations about, will show a card with 3 diferents colors. If the rent are late, the actual day is bigger than day that was registred on Tenant, the color will be RED. If the actual day is iqual than day that was registred on Tenant, its the last day to do the payment, so the color will be YELLOW. And if you payed the rent, you need mark off the button editing the rent, and the payment is done for 1 month, and the color will be GREEN.
 ![Mobile 1](https://github.com/Igorcand/Rent-Control-Flask/blob/master/assets/lated_rent.png) 
 
 ![Mobile 1](https://github.com/Igorcand/Rent-Control-Flask/blob/master/assets/last_and_inday_rents.png) 
