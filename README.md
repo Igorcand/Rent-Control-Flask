@@ -92,7 +92,7 @@ Like the Flask Framework give us free to create the structure like we want, this
 ![Mobile 1](https://github.com/Igorcand/Rent-Control-Flask/blob/master/assets/database.png)
 
 ## Login and Register
-When the code is runned, you will need access with your email and password, if you didn't its registred you need click on register button and fill the form
+When the code is ran, you will need access with your email and password, if you didn't its registred you need click on register button and fill the form
 
 ![Mobile 1](https://github.com/Igorcand/Rent-Control-Flask/blob/master/assets/login.png) 
 ![Mobile 1](https://github.com/Igorcand/Rent-Control-Flask/blob/master/assets/register.png) 
